@@ -24,7 +24,7 @@
 
     <div class="container-fluid">
         <header>
-            <h1>Login, Built Using MySql &amp; Bootstrap</h1>
+            <h1>Login, Built Using ASP.net, MySql, &amp; Bootstrap</h1>
         </header>
         <ul class="nav nav-tabs generalNavBar">
             <li id="signupLink" style="margin-right: 20px; float:right"><a href="signup.aspx">Signup</a></li>
@@ -42,7 +42,7 @@
         </div>
     </div>
     <footer>
-        &copy; Copyright Onwerd by Mark<br />
+        &copy; Copyright Onwed by Mark<br />
         Created by - Mark
     </footer>
 
