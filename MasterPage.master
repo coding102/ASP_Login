@@ -1,0 +1,78 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"> </script>
+
+    <style>
+        header, footer {
+            width: 100%;
+            background-color:dodgerblue;
+            color:white;
+            text-align:center;
+            padding:5px;
+            clear:both;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container-fluid">
+        <header>
+            <h1>Login, Built Using MySql &amp; Bootstrap</h1>
+        </header>
+        <ul class="nav nav-tabs generalNavBar">
+            <li id="signupLink" style="margin-right: 20px; float:right"><a href="signup.aspx">Signup</a></li>
+            <li id="loginLink" style="margin-right: 20px; float:right"><a href="login.aspx">Login</a></li>
+        </ul>
+        <ul class="nav nav-tabs usershubNavBar" style="display:none">
+            <li style="margin-right: 20px; float:right"><a href="login.aspx">Logout</a></li>
+        </ul>
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-10 mainContentColumn" style="margin: 20px auto 20px  auto;">
+                <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+                </asp:ContentPlaceHolder></div>
+            <div class="col-sm-1"></div>
+        </div>
+    </div>
+    <footer>
+        &copy; Copyright Onwerd by Mark<br />
+        Created by - Mark
+    </footer>
+
+    <script>
+        var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+        if (40 + $("mainContentColumn").height() + $("header").height() + $("footer").height() < h) {
+            $("mainContentColumn").height((h - $("header").height() - $("footer").height() - 40));
+        }
+
+        $(function () {
+            if ('<%=Session["LoggedIn]%>' == "") {
+                $("#loginLink").css("display", "block");
+            }
+            else {
+                $(".usershubNavBar").css("display", "block");
+                $(".generalNavBar").css("display", "none");
+                $("#loginLink").css("display", "none");
+            }
+        });
+        $(function () {
+            var url = location.pathname.substring(1);
+            switch (url) {
+                case "login.aspx":
+                    $("#loginLink").css("display", "none");
+                    break;
+                case "signup.aspx":
+                    $("#signupLink").css("display", "none");
+                    break;
+            }
+        });
+    </script>
+</body>
+</html>
