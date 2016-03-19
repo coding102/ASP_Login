@@ -135,6 +135,32 @@
                 });
             }
         });
+
+        $("#btnConfirmCode").click(function (){
+            if ($("#txtresetEmail").val() == "") {
+                $(".lblCodeError").html("Please write proper email");
+            } else {
+                var code = $(#txtConfirmCode).val();
+                $.ajax({
+                    type: "POST",
+                    url: "login.aspx/ValidateResetCode",
+                    contentType: "application/json; charset=utf-8",
+                    data: '{"code":"' + code + '"}',
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.d == "right") {
+                            alert("Correct reset key. You should be able to enter your new password now");
+                            window.location.replace("changepass.aspx");
+                        } else {
+                            $(".lblCodeEditor").text("Incorrect reset key");
+                        }
+                    },
+                    error: function (data) {
+                        alert("Server is too busy at the moment");
+                    }
+                });
+            }
+        });
     </script>
 
 
