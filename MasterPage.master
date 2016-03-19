@@ -53,7 +53,7 @@
         }
 
         $(function () {
-            if ('<%=Session["LoggedIn]%>' == "") {
+            if ('<%=Session["LoggedIn"]%>' == "") {
                 $("#loginLink").css("display", "block");
             }
             else {

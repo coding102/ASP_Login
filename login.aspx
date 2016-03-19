@@ -35,12 +35,15 @@
                         <h3>By email</h3>
                         <div>
                             <div id="divConfirmEmail" style="display:block">
-                                <input type="email" style="border-radius:5px; id="txtResetEmail" class="txtResetEmail" runat="server" />
+                                <input type="email" style="border-radius:5px" id="txtResetEmail" class="txtResetEmail" runat="server" />
                                 <input type="button" id="btnSendCode" value="Send Code" /><br />
                             </div>
                             <div id="divConfirmCode" style="display:none; float:left">
-
+                                <input type="text" style="border-radius: 5px" placeholder="Enter Code" id="txtConfirmCode" />
+                                <input type="button" id="btnConfirmCode" value="Confirm Code" />
+                                <input type="button" id="btnResendCode" value="Resend Code" /><br />
                             </div>
+                            <label class="lblCodeError"></label>
                         </div>
                     </div>
                 </div>
@@ -49,6 +52,45 @@
             <div class="col-lg-2"></div>
             
         </div>
+        <div class="row" style="height: 80px"></div>
     </form>
+
+    <script>
+        $("#divReset").accordion({
+            collapsible: true
+        });
+
+        $("#lnForgotPassword").click(function () {
+            $("#divReset").css("display", "block");
+            $(".txtResetEmail").val($("#txtEmail").val());
+        });
+
+        $("btnReset").click(function () {
+            if ($("#txtSecurityAnswer").val() != '') {
+                var answer = $("#txtSecurityAnswer").val();
+                $.ajax({
+                    type: "POST",
+                    url: "login.aspx/CheckAnswer",
+                    contentType: "application/json; charset=utf-8",
+                    data: '{"answer":"' + answer + '"}',
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.d == "true") {
+                            $("#divResetByAnswer").css("display", "none");
+                            window.location.replace("changepass.aspx");
+                        }
+                        else {
+                            $("#lblAnswerError").text("try again");
+                        }
+                    },
+                    error: function (data) { alert("server too busy"); }
+                });
+            }
+            else {
+                $("#lblAnswerError").text("Enter your answer first");
+            }
+        });
+    </script>
+
 
 </asp:Content>
