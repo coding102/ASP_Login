@@ -90,6 +90,30 @@
                 $("#lblAnswerError").text("Enter your answer first");
             }
         });
+
+        $("#btnSendCode").click(function () {
+            if ($("#txtResetEmail").val() == "") {
+                $(".lblCodeError").html("Please write proper email");
+            } else {
+                var email = $(".txtResetEmail").val();
+                $("#divConfirmCode").css("display", "block");
+                $("#divConfirmEmail").css("display", "none");
+
+                $.ajax({
+                    type: "POST",
+                    url: "login.aspx/SendCodeInEmail",
+                    contentType: "application/json; charset=utf-8",
+                    data: '{"email":"' + email + '"}',
+                    datatype: "json",
+                    success: function (data) {
+                        $(".lblCodeError").text(data.d);
+                    },
+                    error: function (data) {
+                        alert("Server is too busy at the moment");
+                    }
+                });
+            }
+        });
     </script>
 
 
