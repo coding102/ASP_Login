@@ -116,7 +116,7 @@
         });
 
         $("#btnResendCode").click(function () {
-            if ($(#txtConfirmCode).val() == "") {
+            if ($("#txtConfirmCode").val() == "") {
                 $(".lblCodeError").html("Please write the code you received");
             } else {
                 var email = $(".txtresetEmail").val();
@@ -127,7 +127,7 @@
                     data: '("email":"' + email + '")',
                     dataType: "json",
                     success: function (data){
-                        $(".lblCodeError").text.d);
+                        $(".lblCodeError").text.d;
                     },
                     error: function (data){
                         alert("Server is too busy at the moment");
@@ -140,7 +140,7 @@
             if ($("#txtresetEmail").val() == "") {
                 $(".lblCodeError").html("Please write proper email");
             } else {
-                var code = $(#txtConfirmCode).val();
+                var code = $("#txtConfirmCode").val();
                 $.ajax({
                     type: "POST",
                     url: "login.aspx/ValidateResetCode",
